@@ -1,0 +1,137 @@
+@use "./_reset";
+@use "./vars";
+@use "./fonts";
+
+/* BASIC SETTINGS */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  touch-action: manipulation;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "IBMPlexMono", sans-serif;
+  font-weight: 400;
+  font-display: swap;
+
+  background: var(--color-bg);
+  color: var(--color-black);
+
+  overflow-x: hidden !important;
+
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-block-start: 75px;
+  min-height: 100vh;
+}
+
+img {
+  pointer-events: none;
+  user-select: none;
+}
+
+.App {
+  overflow-x: hidden;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+.header__container {
+  margin-bottom: 80px;
+}
+
+footer {
+  margin-top: auto;
+}
+
+::-webkit-scrollbar {
+  background: var(--color-gray);
+  display: block;
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-blue-light);
+  display: block;
+  width: 8px;
+  border-radius: 5px;
+}
+
+.container {
+  max-width: 1120px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+.list_container {
+  max-width: 1010px;
+  margin: 0 auto;
+  position: relative;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a {
+  color: inherit;
+  font-family: inherit;
+  line-height: 140%;
+  user-select: none;
+}
+
+h2 {
+  line-height: 100%;
+}
+
+label,
+button,
+input,
+li {
+  user-select: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "PixelUltima-bd", sans-serif;
+}
+
+a {
+  outline: none !important;
+}
+
+ul,
+li {
+  list-style-type: none;
+}
+
+button {
+  font-family: "IBMPlexMono", sans-serif;
+  font-weight: 600;
+  touch-action: manipulation;
+}
