@@ -1,0 +1,23 @@
+.header {
+  margin-top: 40px;
+}
+
+.header__wrapper {
+  nav {
+    ul {
+      display: flex;
+      justify-content: space-between;
+
+      li {
+        a {
+          padding: 16px 20px;
+          display: block;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}

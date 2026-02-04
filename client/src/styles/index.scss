@@ -24,8 +24,11 @@ body {
   font-weight: 400;
   font-display: swap;
 
-  background: var(--color-bg);
   color: var(--color-black);
+
+  background-image: url("/bg.svg");
+  background-position: center;
+  background-repeat: repeat;
 
   overflow-x: hidden !important;
 
@@ -37,11 +40,6 @@ html {
   scroll-behavior: smooth;
   scroll-padding-block-start: 75px;
   min-height: 100vh;
-}
-
-img {
-  pointer-events: none;
-  user-select: none;
 }
 
 .App {
@@ -64,20 +62,20 @@ footer {
 
 ::-webkit-scrollbar {
   background: var(--color-gray);
-  display: block;
+  display: none;
   width: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--color-blue-light);
-  display: block;
+  display: none;
   width: 8px;
   border-radius: 5px;
 }
 
 .container {
-  max-width: 1120px;
-  padding: 0 15px;
+  max-width: 1460px;
+  padding: 0 10px;
   margin: 0 auto;
 }
 
@@ -98,18 +96,10 @@ a {
   color: inherit;
   font-family: inherit;
   line-height: 140%;
-  user-select: none;
 }
 
 h2 {
   line-height: 100%;
-}
-
-label,
-button,
-input,
-li {
-  user-select: none;
 }
 
 h1,
@@ -118,7 +108,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "PixelUltima-bd", sans-serif;
+  font-family: "PixelUltima", sans-serif;
 }
 
 a {
