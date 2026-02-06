@@ -5,6 +5,7 @@ import Offer from "@/components/home/offer/Offer";
 import Capabilities from "@/components/home/capabilities/Capabilities";
 import Clients from "@/components/home/clients/Clients";
 import Cases from "@/components/home/cases/Cases";
+import Blog from "@/components/home/blog/Blog";
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
       <Capabilities />
       <Clients />
       <Cases />
+      <Blog />
     </div>
   );
 };
