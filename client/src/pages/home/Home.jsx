@@ -15,7 +15,7 @@ const Home = () => {
       <Capabilities />
       <Clients />
       <Cases />
-      <Blog />
+      <Blog/>
     </div>
   );
 };
