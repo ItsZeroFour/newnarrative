@@ -4,6 +4,7 @@ import Head from "@/components/home/head/Head";
 import Offer from "@/components/home/offer/Offer";
 import Capabilities from "@/components/home/capabilities/Capabilities";
 import Clients from "@/components/home/clients/Clients";
+import Cases from "@/components/home/cases/Cases";
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
       <Offer />
       <Capabilities />
       <Clients />
+      <Cases />
     </div>
   );
 };
