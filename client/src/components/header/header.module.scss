@@ -14,9 +14,11 @@
         a {
           padding: 16px 20px;
           display: block;
+          transition: all 0.2s ease;
 
           &:hover {
-            text-decoration: underline;
+            background: var(--color-blue);
+            color: var(--color-white);
           }
         }
       }
