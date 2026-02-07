@@ -11,7 +11,9 @@ const Footer = () => {
           <div className={style.footer__top}>
             <div className={style.footer__top__left}>
               <p>[Контакты]</p>
-              <h2>ГОТОВЫ ОБСУДИТЬ проект?</h2>
+              <h2>
+                ГОТОВЫ ОБСУДИТЬ <br /> проект?
+              </h2>
             </div>
 
             <Link href="/">

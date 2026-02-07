@@ -80,6 +80,10 @@ const Clients = () => {
                 />
               </li>
             </ul>
+
+            <div className={style.clients__link}>
+              <CTALink href="/" text="Стать нашим партнером" />
+            </div>
           </div>
         </div>
       </div>

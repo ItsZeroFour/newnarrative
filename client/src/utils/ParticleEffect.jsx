@@ -1,56 +1,52 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useCallback } from "react";
+
+const PARTICLE_CONFIG = {
+  BASE_COLOR: { r: 1, g: 7, b: 21 },
+  OPACITY: 0,
+  DENSITY_FACTOR: 0.95,
+  PARTICLE_SIZE: 3,
+  SOLID_BOTTOM_HEIGHT: 20,
+  SOLID_OPACITY: 255,
+  RESIZE_DEBOUNCE: 100,
+};
 
 const ParticleEffect = () => {
   const canvasRef = useRef(null);
+  const resizeTimeoutRef = useRef(null);
+  const animationFrameRef = useRef(null);
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-    let animationFrameId;
-    let resizeTimeout;
+  const createSeededRandom = useCallback((seed) => {
+    const a = 1664525;
+    const c = 1013904223;
+    const m = 2 ** 32;
+    let state = seed || Math.floor(Math.random() * m);
 
-    const BASE_COLOR = { r: 1, g: 7, b: 21 };
-    const OPACITY = 0;
-    const DENSITY_FACTOR = 0.95;
-    const PARTICLE_SIZE = 3;
-    const SOLID_BOTTOM_HEIGHT = 20;
-    const SOLID_OPACITY = 255;
-
-    const createSeededRandom = (seed) => {
-      const a = 1664525;
-      const c = 1013904223;
-      const m = 2 ** 32;
-      let state = seed || Math.floor(Math.random() * m);
-
-      return () => {
-        state = (a * state + c) % m;
-        return state / m;
-      };
+    return () => {
+      state = (a * state + c) % m;
+      return state / m;
     };
+  }, []);
 
-    const resizeCanvas = () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        canvas.width = canvas.parentElement.clientWidth;
-        canvas.height = canvas.parentElement.clientHeight;
-        drawParticles();
-      }, 10);
-    };
-
-    const drawParticles = () => {
-      const { width, height } = canvas;
-
+  const drawParticles = useCallback(
+    (ctx, width, height) => {
       const imageData = ctx.createImageData(width, height);
       const data = imageData.data;
+      const {
+        BASE_COLOR,
+        OPACITY,
+        DENSITY_FACTOR,
+        PARTICLE_SIZE,
+        SOLID_BOTTOM_HEIGHT,
+        SOLID_OPACITY,
+      } = PARTICLE_CONFIG;
 
-      const bgColor = [BASE_COLOR.r, BASE_COLOR.g, BASE_COLOR.b, 255];
       for (let i = 0; i < data.length; i += 4) {
-        data[i] = bgColor[0];
-        data[i + 1] = bgColor[1];
-        data[i + 2] = bgColor[2];
-        data[i + 3] = bgColor[3];
+        data[i] = BASE_COLOR.r;
+        data[i + 1] = BASE_COLOR.g;
+        data[i + 2] = BASE_COLOR.b;
+        data[i + 3] = 255;
       }
 
       const seed = width * 10000 + height;
@@ -82,37 +78,63 @@ const ParticleEffect = () => {
       }
 
       const solidStartY = Math.max(0, height - SOLID_BOTTOM_HEIGHT);
-      const solidColor = [
-        BASE_COLOR.r,
-        BASE_COLOR.g,
-        BASE_COLOR.b,
-        SOLID_OPACITY,
-      ];
 
       for (let y = solidStartY; y < height; y++) {
         const rowStart = y * width4;
 
         for (let x = 0; x < width; x++) {
           const index = rowStart + x * 4;
-          data[index] = solidColor[0];
-          data[index + 1] = solidColor[1];
-          data[index + 2] = solidColor[2];
-          data[index + 3] = solidColor[3];
+          data[index] = BASE_COLOR.r;
+          data[index + 1] = BASE_COLOR.g;
+          data[index + 2] = BASE_COLOR.b;
+          data[index + 3] = SOLID_OPACITY;
         }
       }
 
       ctx.putImageData(imageData, 0, 0);
-    };
+    },
+    [createSeededRandom]
+  );
+
+  const resizeCanvas = useCallback(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    clearTimeout(resizeTimeoutRef.current);
+
+    resizeTimeoutRef.current = setTimeout(() => {
+      const ctx = canvas.getContext("2d");
+      const parent = canvas.parentElement;
+
+      if (!parent) return;
+
+      const width = parent.clientWidth;
+      const height = parent.clientHeight;
+
+      canvas.width = width;
+      canvas.height = height;
+
+      drawParticles(ctx, width, height);
+    }, PARTICLE_CONFIG.RESIZE_DEBOUNCE);
+  }, [drawParticles]);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
     resizeCanvas();
+
     window.addEventListener("resize", resizeCanvas);
 
     return () => {
       window.removeEventListener("resize", resizeCanvas);
-      clearTimeout(resizeTimeout);
-      cancelAnimationFrame(animationFrameId);
+      clearTimeout(resizeTimeoutRef.current);
+
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
     };
-  }, []);
+  }, [resizeCanvas]);
 
   return (
     <div
@@ -122,6 +144,7 @@ const ParticleEffect = () => {
         position: "relative",
         overflow: "hidden",
       }}
+      aria-hidden="true"
     >
       <canvas
         ref={canvasRef}
@@ -130,6 +153,7 @@ const ParticleEffect = () => {
           height: "100%",
           display: "block",
         }}
+        aria-label="Декоративный эффект частиц"
       />
     </div>
   );
