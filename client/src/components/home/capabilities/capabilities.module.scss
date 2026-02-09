@@ -1,3 +1,5 @@
+@use "../../../styles/mixins" as *;
+
 .capabilities {
   background: var(--color-black);
 }
@@ -5,12 +7,17 @@
 .capabilities__wrapper {
   overflow: hidden;
   white-space: nowrap;
+  @include flex-center(column);
+  padding-bottom: 125px;
+
+  @include tablet {
+    padding-bottom: 80px;
+  }
 }
 
 .capabilities__title {
   padding-top: 120px;
   padding-bottom: 64px;
-
   overflow: hidden;
   display: inline-block;
   white-space: nowrap;
@@ -20,9 +27,7 @@
     font-size: 160px;
     font-family: "PixelUltima", sans-serif;
     font-weight: 400;
-
     text-transform: uppercase;
-
     display: inline-block;
     margin: 0 50px;
 
@@ -30,7 +35,7 @@
       color: var(--color-blue);
     }
 
-    @media (max-width: 960px) {
+    @include desktop-sm {
       font-size: 100px;
     }
 
@@ -41,26 +46,12 @@
 
     @media (max-width: 425px) {
       font-size: 70px;
-      margin: 0 20px;
     }
   }
 
-  @media (max-width: 768px) {
+  @include tablet {
     padding-top: 80px;
     padding-bottom: 60px;
-  }
-}
-
-.capabilities__wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  padding-bottom: 125px;
-
-  @media (max-width: 768px) {
-    padding-bottom: 80px;
   }
 }
 
@@ -71,7 +62,7 @@
   border: 1px solid var(--color-blue);
   overflow: hidden;
 
-  @media (max-width: 768px) {
+  @include tablet {
     width: 100%;
   }
 }
@@ -80,6 +71,9 @@
   background-image: url("/images/capabilities/capabilities_bg.svg");
   background-position: left;
   background-repeat: no-repeat;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid var(--color-blue);
 
   p {
     padding-left: 8px;
@@ -92,7 +86,7 @@
     }
   }
 
-  @media (max-width: 1220px) {
+  @include desktop-md {
     background-image: url("/images/capabilities/capabilities_bg_2.svg");
   }
 
@@ -111,12 +105,6 @@
   }
 }
 
-.capabilities__skills__header {
-  display: flex;
-  justify-content: space-between;
-  border: 1px solid var(--color-blue);
-}
-
 .capabilities__skills__header__nav {
   display: flex;
   align-items: center;
@@ -124,22 +112,19 @@
   gap: 4px;
   z-index: 2;
 
-  .capabilities__skills__header__nav__item {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
+  &__item {
+    @include flex-center(column);
     width: 18px;
     height: 18px;
-
     border: 1px solid var(--color-blue);
     background: var(--color-white);
     padding: 4px;
-
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     user-select: none;
 
-    &:nth-child(1) {
+    &:first-child {
       justify-content: end;
     }
   }
@@ -149,13 +134,12 @@
   padding: 40px;
   border: 1px solid var(--color-blue);
   margin-top: 4px;
+  @include flex-center(column);
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @include tablet {
+    padding: 25px 20px;
+  }
 
-  // Стили для слайдера Swiper
   .skillsSlider {
     width: 100%;
     overflow: visible !important;
@@ -178,36 +162,21 @@
 
     :global(.swiper-button-next),
     :global(.swiper-button-prev) {
-      color: #000;
-      background: rgba(255, 255, 255, 0.9);
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: 1px solid var(--color-blue);
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-
-      &:hover {
-        background: var(--color-blue);
-        color: var(--color-white);
-      }
-
-      &::after {
-        font-size: 20px;
-        font-weight: bold;
-      }
+      @include swiper-button(40px);
     }
 
     :global(.swiper-button-prev) {
       left: -15px;
-      @media (max-width: 480px) {
+
+      @include mobile {
         left: 0;
       }
     }
 
     :global(.swiper-button-next) {
       right: -15px;
-      @media (max-width: 480px) {
+
+      @include mobile {
         right: 0;
       }
     }
@@ -236,6 +205,7 @@
     p {
       height: 45px;
     }
+
     img {
       max-width: 100%;
       height: auto;
@@ -244,43 +214,13 @@
 
   .capabilities__skills__link {
     a {
-      display: block;
+      @include cta-button(var(--color-blue), var(--color-black));
       margin-top: 25px;
-      padding: 20px 15px;
-      background: var(--color-blue);
-      color: var(--color-white);
-      border: 2px solid var(--color-black);
-      position: relative;
-
       transform-style: preserve-3d;
 
-      transition: all 0.2s ease;
-
       img {
-        transition: all 0.2s ease;
         margin-left: 8px;
         vertical-align: middle;
-      }
-
-      @media (pointer: fine) {
-        &:hover {
-          background: var(--color-red);
-
-          img {
-            transform: rotate(45deg);
-          }
-        }
-      }
-
-      &::before {
-        content: "";
-        position: absolute;
-        left: calc(-1 * 2px);
-        top: 20%;
-        width: calc(100% + 4px);
-        height: 100%;
-        background: var(--color-black);
-        transform: translateZ(-1px);
       }
 
       @media (max-width: 620px) {
@@ -297,13 +237,13 @@
     flex-wrap: wrap;
     gap: 64px 162px;
 
+    @include desktop-sm {
+      gap: 65px;
+    }
+
     li {
       width: 280px;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      @include flex-center(column);
 
       p {
         margin-top: 25px;
@@ -313,14 +253,6 @@
         text-align: center;
       }
     }
-
-    @media (max-width: 960px) {
-      gap: 65px;
-    }
-  }
-
-  @media (max-width: 768px) {
-    padding: 25px 20px;
   }
 }
 
@@ -332,13 +264,9 @@
   button {
     width: 56px;
     height: 56px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
+    @include flex-center;
     background: none;
     border: 1px solid var(--color-blue);
-
     transition: all 0.2s ease;
 
     svg {

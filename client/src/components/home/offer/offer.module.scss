@@ -24,6 +24,8 @@
   align-items: center;
 
   .offer__title {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
     width: fit-content;
     padding: 48px 64px;
     position: relative;

@@ -155,6 +155,7 @@
     .cases__item__wrapper > img {
       width: 100%;
       height: 600px;
+      -o-object-fit: cover;
       object-fit: cover;
     }
   }
@@ -200,6 +201,8 @@
     color: var(--color-white);
     border: 2px solid var(--color-white);
     position: relative;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
     width: fit-content;
 
     transition: all 0.2s ease;

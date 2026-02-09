@@ -19,7 +19,7 @@ const SkillItem = ({ image, alt, textLines }) => (
       alt={alt}
       width={212}
       height={166}
-      quality={100}
+      quality={75}
       style={{ objectFit: "contain" }}
     />
     <p>

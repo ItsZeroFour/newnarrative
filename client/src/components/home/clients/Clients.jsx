@@ -23,7 +23,7 @@ const Clients = () => {
               <li>
                 <p>Макси</p>
                 <Image
-                  src="/images/clients/maxi.png"
+                  src="/images/clients/maxi.webp"
                   alt="maxi"
                   width={280}
                   height={158}
@@ -33,7 +33,7 @@ const Clients = () => {
               <li>
                 <p>Макси</p>
                 <Image
-                  src="/images/clients/yandex.png"
+                  src="/images/clients/yandex.webp"
                   alt="yandex"
                   width={280}
                   height={158}
@@ -43,7 +43,7 @@ const Clients = () => {
               <li>
                 <p>Макси</p>
                 <Image
-                  src="/images/clients/takayama.png"
+                  src="/images/clients/takayama.webp"
                   alt="takayama"
                   width={280}
                   height={158}
@@ -53,7 +53,7 @@ const Clients = () => {
               <li>
                 <p>Макси</p>
                 <Image
-                  src="/images/clients/magnit.png"
+                  src="/images/clients/magnit.webp"
                   alt="magnit"
                   width={280}
                   height={158}
@@ -63,7 +63,7 @@ const Clients = () => {
               <li>
                 <p>Макси</p>
                 <Image
-                  src="/images/clients/cordiant.png"
+                  src="/images/clients/cordiant.webp"
                   alt="cordiant"
                   width={280}
                   height={158}
@@ -73,7 +73,7 @@ const Clients = () => {
               <li>
                 <p>Макси</p>
                 <Image
-                  src="/images/clients/kinopoisk.png"
+                  src="/images/clients/kinopoisk.webp"
                   alt="kinopoisk"
                   width={280}
                   height={158}

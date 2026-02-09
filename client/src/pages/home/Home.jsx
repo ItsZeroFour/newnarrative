@@ -1,11 +1,15 @@
+import dynamic from "next/dynamic";
+
 import React from "react";
 import style from "./home.module.scss";
-import Head from "@/components/home/head/Head";
+const Head = dynamic(() => import("@/components/home/head/Head"));
 import Offer from "@/components/home/offer/Offer";
-import Capabilities from "@/components/home/capabilities/Capabilities";
+const Capabilities = dynamic(() =>
+  import("@/components/home/capabilities/Capabilities")
+);
 import Clients from "@/components/home/clients/Clients";
-import Cases from "@/components/home/cases/Cases";
-import Blog from "@/components/home/blog/Blog";
+const Cases = dynamic(() => import("@/components/home/cases/Cases"));
+const Blog = dynamic(() => import("@/components/home/blog/Blog"));
 
 const Home = () => {
   return (
@@ -15,7 +19,7 @@ const Home = () => {
       <Capabilities />
       <Clients />
       <Cases />
-      <Blog/>
+      <Blog />
     </div>
   );
 };
