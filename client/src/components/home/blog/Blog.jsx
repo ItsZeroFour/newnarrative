@@ -156,6 +156,9 @@ const Blog = () => {
                 ref={prevRef}
                 className={style.blog__navigation__prev}
                 aria-label="Предыдущий слайд"
+                type="button"
+                onTouchStart={(e) => e.stopPropagation()}
+                onClick={(e) => e.stopPropagation()}
               >
                 <SlideIcon />
               </button>
@@ -163,6 +166,9 @@ const Blog = () => {
                 ref={nextRef}
                 className={style.blog__navigation__next}
                 aria-label="Следующий слайд"
+                type="button"
+                onTouchStart={(e) => e.stopPropagation()}
+                onClick={(e) => e.stopPropagation()}
               >
                 <SlideIcon />
               </button>
@@ -175,14 +181,17 @@ const Blog = () => {
             slidesPerView={1}
             slidesPerGroup={1}
             loop={true}
-            navigation={{
-              prevEl: prevRef.current,
-              nextEl: nextRef.current,
-            }}
             breakpoints={swiperBreakpoints}
-            onBeforeInit={(swiper) => {
-              swiper.params.navigation.prevEl = prevRef.current;
-              swiper.params.navigation.nextEl = nextRef.current;
+            onInit={(swiper) => {
+              if (prevRef.current && nextRef.current) {
+                swiper.params.navigation.prevEl = prevRef.current;
+                swiper.params.navigation.nextEl = nextRef.current;
+                swiper.navigation.init();
+                swiper.navigation.update();
+              }
+            }}
+            onResize={(swiper) => {
+              if (swiper.navigation) swiper.navigation.update();
             }}
             className={style.blog__slider}
           >
